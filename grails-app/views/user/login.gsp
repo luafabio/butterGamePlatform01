@@ -38,4 +38,24 @@ value='${user?.password}' />
 </div>
 </body>
 </html>
+<!-- 	<body>
+		<div class="form-signin">
+			<g:form action="doLogin" method="post">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				<label for="email" class="sr-only">Email address</label>
+				<input type="email" id="email" class="form-control" placeholder="Email" value='${user?.email}' required autofocus>
+				<label for="password" class="sr-only">Password</label>
+				<input type="password" id="password" class="form-control" placeholder="Password" value='${user?.password}' required>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="remember-me"> Remember me
+					</label>
+				</div>
+				<div class="buttons">
+					<input class="btn btn-lg btn-primary btn-block" type="submit" value="Login"></input>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				</div>
+			</g:form>
+		</div>
+	</body> -->
 N.B. This
