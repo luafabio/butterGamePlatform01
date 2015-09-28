@@ -3,6 +3,7 @@ package btg.game
 import java.util.List;
 
 import btg.person.CurrentGame;
+import btg.person.User;
 import btg.game.CurrentQuestion;
 import btg.game.Question;
 
@@ -113,7 +114,14 @@ class DisplayQuestionController {
 			currentGame1.result = true
 		}
 		
+		//GUARDO EL JUEGO CON PUNTERO EN EL USUARIO
 		currentGame1.user = session.user
-		currentGame1.save()
+		currentGame1.save flush:true
+		
+		//ASIGNO PUNTAJE TOTAL
+		def currentUser1 = User.findByUserName(session.user.userName)
+		currentUser1.totalScore = currentUser1.totalScore + currentGame1.score
+		currentUser1.save flush:true
+		
 	}
 }

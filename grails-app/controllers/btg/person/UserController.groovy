@@ -132,7 +132,7 @@ class UserController {
 		}
 	}
 	
-	def logOut = {
+	def logout = {
 		session.invalidate()
 		redirect(action:'login')
 	}
