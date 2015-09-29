@@ -28,7 +28,7 @@
 						
 					</h2>
 					</g:if>
-					<ol class="property-list question">
+					<ul class="property-list question">
 					
 						
 					
@@ -60,7 +60,7 @@
 						</g:if>
 					
 					
-					</ol>
+					</ul>
 					<g:form url="[resource:questionInstance, action:'delete']" method="DELETE">
 						<fieldset class="buttons">
 							<a href="${createLink(action: 'edit',id:"${questionInstance.id}")}" class="btn btn-link" role="button">Editar</a>

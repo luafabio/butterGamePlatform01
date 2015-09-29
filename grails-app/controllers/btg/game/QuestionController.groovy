@@ -47,8 +47,8 @@ class QuestionController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])
-                redirect questionInstance
+                //flash.message = message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Pregunta'), questionInstance.id])
+                redirect action:"index"
             }
             '*' { respond questionInstance, [status: CREATED] }
         }

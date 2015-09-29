@@ -30,6 +30,7 @@
 		        <li><g:link controller="Stats">Estadisticas</g:link></li>
 		        <li><g:link controller="User">ABM Usuarios</g:link></li>
 		        <li><g:link controller="DisplayQuestion">Juego</g:link></li>
+		        <li><g:link controller="User" action="logOut">Log out</g:link></li>
 		        
 		      </ul>
 		    </div>

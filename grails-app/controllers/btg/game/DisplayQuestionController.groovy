@@ -27,7 +27,7 @@ class DisplayQuestionController {
 	
 	def setDB(){
 		
-		currentGame1.numQuestion = 0
+		currentGame1.numQuestion = 1
 		currentGame1.score = 0
 		allQuestion = Question.findAll()
 		Collections.shuffle(allQuestion)
@@ -35,18 +35,19 @@ class DisplayQuestionController {
 	
 	
 	def nextQuestion(){
+		currentGame1.numQuestion++
+		if (currentGame1.numQuestion == 6){
+			finalScore()
+			render( view: "final", model: [gameInstance: currentGame1])
+			
+		}
+		else
 		renderQuestion(getQuestion())
 	}
 	
 	def getQuestion(){
-		currentGame1.numQuestion++
-		if (currentGame1.numQuestion == 6){
-			finalScore()
-			render("Termino el juego    "+currentGame1.score)
-			if (currentGame1.score > 5) render ("    has ganado")
-		}
-		else
-			return randomizeQuestion(allQuestion.get(currentGame1.numQuestion))	
+		
+		return randomizeQuestion(allQuestion.get(currentGame1.numQuestion))	
 	}
 	
 	def renderQuestion(questionAux){
@@ -55,13 +56,16 @@ class DisplayQuestionController {
 	}
 	
 	def isCorrectAnswer(currentAnswer){ 
+		
 		if (currentAnswer == currentQuestion1.correctAns){
 			addScore(true)
-			currentQuestion1.statusQues = "Pregunta Correcta"
+			currentQuestion1.statusQues = "Respuesta Correcta"
+			
 		} 
 		else {
 			addScore(false)
-			currentQuestion1.statusQues = "Pregunta Incorrecta"
+			currentQuestion1.statusQues = "Respuesta Incorrecta"
+			
 		}
 			
 		render( view: "resultQuestion", model: [currentInstance: currentQuestion1])	//renderiza el resultado de la pregunta
@@ -70,6 +74,7 @@ class DisplayQuestionController {
 	
 	def isCorrectAnswerA(){
 		isCorrectAnswer(currentQuestion1.answer1)
+		
 		
 	}
 	
