@@ -3,6 +3,7 @@ package btg.game
 import java.util.List;
 
 import btg.person.CurrentGame;
+import btg.person.User;
 import btg.game.CurrentQuestion;
 import btg.game.Question;
 
@@ -27,7 +28,7 @@ class DisplayQuestionController {
 	
 	def setDB(){
 		
-		currentGame1.numQuestion = 1
+		currentGame1.numQuestion = 0
 		currentGame1.score = 0
 		allQuestion = Question.findAll()
 		Collections.shuffle(allQuestion)
@@ -35,19 +36,23 @@ class DisplayQuestionController {
 	
 	
 	def nextQuestion(){
-		currentGame1.numQuestion++
-		if (currentGame1.numQuestion == 6){
-			finalScore()
-			render( view: "final", model: [gameInstance: currentGame1])
-			
-		}
-		else
 		renderQuestion(getQuestion())
 	}
 	
 	def getQuestion(){
-		
-		return randomizeQuestion(allQuestion.get(currentGame1.numQuestion))	
+		currentGame1.numQuestion++
+		if (currentGame1.numQuestion == 6){
+			finalScore()
+//			render("Termino el juego    "+currentGame1.score)
+//			if (currentGame1.score > 5) render ("    has ganado")
+			redirect(action: 'termino')
+		}
+		else
+			return randomizeQuestion(allQuestion.get(currentGame1.numQuestion))	
+	}
+	
+	def termino() {
+		[gameInstance: currentGame1]
 	}
 	
 	def renderQuestion(questionAux){
@@ -56,16 +61,13 @@ class DisplayQuestionController {
 	}
 	
 	def isCorrectAnswer(currentAnswer){ 
-		
 		if (currentAnswer == currentQuestion1.correctAns){
 			addScore(true)
-			currentQuestion1.statusQues = "Respuesta Correcta"
-			
+			currentQuestion1.statusQues = "true"
 		} 
 		else {
 			addScore(false)
-			currentQuestion1.statusQues = "Respuesta Incorrecta"
-			
+			currentQuestion1.statusQues = "false"
 		}
 			
 		render( view: "resultQuestion", model: [currentInstance: currentQuestion1])	//renderiza el resultado de la pregunta
@@ -74,7 +76,6 @@ class DisplayQuestionController {
 	
 	def isCorrectAnswerA(){
 		isCorrectAnswer(currentQuestion1.answer1)
-		
 		
 	}
 	
@@ -118,7 +119,14 @@ class DisplayQuestionController {
 			currentGame1.result = true
 		}
 		
+		//GUARDO EL JUEGO CON PUNTERO EN EL USUARIO
 		currentGame1.user = session.user
-		currentGame1.save()
+		currentGame1.save flush:true
+		
+		//ASIGNO PUNTAJE TOTAL
+		def currentUser1 = User.findByUserName(session.user.userName)
+		currentUser1.totalScore = currentUser1.totalScore + currentGame1.score
+		currentUser1.save flush:true
+		
 	}
 }

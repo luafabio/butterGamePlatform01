@@ -6,10 +6,10 @@
 
 	<body>
 		<div class="panel-group">
-		<g:if test="${currentInstance.statusQues =='Respuesta Correcta'}">
+		<g:if test="${currentInstance.statusQues =='true'}">
 		    <div class="panel panel-default">
 		    	<div class="panel-heading">
-					<h1 style="color:green;">${currentInstance.statusQues }!!!</h1>
+					<h1 style="color:green;">Pregunta Correcta</h1>
 				</div>
 				<div class="panel-body">
 					<asset:image src="minion-dance.gif" alt="Butter Game" height="300"/>
@@ -19,10 +19,10 @@
 				</div>
 			</div>
 		</g:if>
-		<g:if test="${currentInstance.statusQues =='Respuesta Incorrecta'}">
+		<g:if test="${currentInstance.statusQues =='false'}">
 			<div class="panel panel-default">
 		    	<div class="panel-heading">
-					<h1 style="color:red;">${currentInstance.statusQues }</h1>
+					<h1 style="color:red;">Pregunta Incorrecta</h1>
 				</div>
 				<div class="panel-body">
 					<asset:image src="minion-fight.gif" alt="Butter Game" height="300"/>

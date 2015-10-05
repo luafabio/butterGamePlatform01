@@ -43,7 +43,7 @@
 		<g:message code="user.confirmPassword.label" default="Confirm Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="confirmPassword" required="" value="${userInstance?.confirmPassword}"/>
+	<g:field type="password" name="confirmPassword" required="" value="${userInstance?.confirmPassword}"/>
 
 </div>
 

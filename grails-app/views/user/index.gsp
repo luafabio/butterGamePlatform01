@@ -42,7 +42,7 @@
 							
 								<td>${fieldValue(bean: userInstance, field: "email")}</td>
 							
-								<td>${fieldValue(bean: userInstance, field: "password")}</td>
+								<td>************</td>
 							
 							</tr>
 						</g:each>

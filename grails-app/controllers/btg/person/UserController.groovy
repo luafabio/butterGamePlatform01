@@ -119,14 +119,16 @@ class UserController {
         }
     }
 	
-	def login = { }
+	def login() {
+		if (session.user) redirect(action:'home')
+	}
 	
 	def doLogin = {
 		def user = User.findWhere(email:params['email'],
 		password:params['password'])
 		session.user = user
 		if (user){
-			redirect(controller:'question',action:'index')
+			redirect(action:'home')
 		}else{
 			redirect(action:'login')
 		}
@@ -136,4 +138,7 @@ class UserController {
 		session.invalidate()
 		redirect(action:'login')
 	}
+	
+	def home = { }
+	
 }
